@@ -1,0 +1,31 @@
+# pruebas.py
+from gestor import registrar_estudiante, agregar_materia, calcular_promedio, consultar_estudiante
+
+try:
+    registrar_estudiante(1, "Ana Gómez")
+    registrar_estudiante(2, "Luis Díaz")
+
+    agregar_materia(1, "Matemáticas", 9.5)
+    agregar_materia(1, "Lengua", 8.0)
+    agregar_materia(2, "Ciencias", 7.2)
+
+    print(consultar_estudiante(1))
+    print(consultar_estudiante(2))
+
+    # Estudiante sin materias
+    registrar_estudiante(3, "Carlos Soto")
+    print(consultar_estudiante(3))
+
+    # Validaciones
+    try:
+        agregar_materia(1, "Historia", 11)  # Nota inválida
+    except ValueError as e:
+        print(f"Error esperado: {e}")
+
+    try:
+        calcular_promedio(999)  # Estudiante inexistente
+    except ValueError as e:
+        print(f"Error esperado: {e}")
+
+except Exception as e:
+    print(f"Error general: {e}")
