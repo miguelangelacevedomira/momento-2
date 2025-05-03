@@ -1,0 +1,33 @@
+estudiantes = {}  # clave: ID, valor: dict con 'nombre' y 'materias' (lista de diccionarios)
+
+def registrar_estudiante(id_est, nombre):
+    if id_est in estudiantes:
+        raise ValueError("El estudiante ya existe.")
+    estudiantes[id_est] = {"nombre": nombre, "materias": []}
+
+def agregar_materia(id_est, nombre_materia, nota):
+    if id_est not in estudiantes:
+        raise ValueError("Estudiante no encontrado.")
+    if not (0 <= nota <= 10):
+        raise ValueError("La nota debe estar entre 0 y 10.")
+    estudiantes[id_est]["materias"].append({"nombre": nombre_materia, "nota": nota})
+
+def calcular_promedio(id_est):
+    if id_est not in estudiantes:
+        raise ValueError("Estudiante no encontrado.")
+    materias = estudiantes[id_est]["materias"]
+    if not materias:
+        return None
+    promedio = sum(m["nota"] for m in materias) / len(materias)
+    return round(promedio, 2)
+
+def consultar_estudiante(id_est):
+    if id_est not in estudiantes:
+        raise ValueError("Estudiante no encontrado.")
+    data = estudiantes[id_est]
+    promedio = calcular_promedio(id_est)
+    return {
+        "nombre": data["nombre"],
+        "materias": data["materias"],
+        "promedio": promedio
+    }
