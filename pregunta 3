@@ -1,0 +1,20 @@
+def registrar_estudiante(base_datos, nombre, nota):
+    base_datos[nombre] = base_datos.get(nombre, []) + [nota]
+    print(f"Estudiante '{nombre}' registrado con nota {nota}.")
+
+  def consultar_estudiante(base_datos, nombre):
+    notas = base_datos.get(nombre)
+    if notas is None:
+        print(f"No se encontró al estudiante '{nombre}'.")
+    else:
+        print(f"Notas de {nombre}: {notas}")  
+
+        ef calcular_promedio(base_datos, nombre):
+    notas = base_datos.get(nombre)
+    if notas:
+        promedio = sum(notas) / len(notas)
+        print(f"Promedio de {nombre}: {promedio:.2f}")
+        return promedio
+    else:
+        print(f"No hay notas registradas para '{nombre}'.")
+        return None
